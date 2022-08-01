@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="login.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <img class="logo" src="https://theleaflet.in/wp-content/uploads/2022/03/The-Leaflet-Logo.png">
+        <div class="login-page">
+            <div class="form">
+                <h1>Login</h1>
+              <form class="login-form" method="POST" id="form-login" action="./portals.html">
+                <!-- action="./portals.html" -->
+                <input type="text" id="username" placeholder="Username" label="username"required/>
+                <input type="password" id="password" placeholder="Password" label="password"required/>
+                <input type="button" style="    background: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%);
+" class="button" onclick="validate()" value="Upload"/>
+              </form>
+            </div>
+          </div>
+
+    </body>
+
+    <script src ="./login.js"> </script>
+</html>

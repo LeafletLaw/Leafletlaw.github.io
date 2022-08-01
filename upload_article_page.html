@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Article Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--datapicker-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+        rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet"/>
+
+
+    <link rel="stylesheet" href="upload_article_page.css">
+    
+
+</head>
+
+<body>
+    <img class="logo" src="https://theleaflet.in/wp-content/uploads/2022/03/The-Leaflet-Logo.png">
+    <div style="height: 125vh; width: 40%; margin:auto;">
+        <form method="post" id="myform" enctype="multipart/form-data">
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="title" placeholder="" type="text" required>
+                <label for="floatingInput">Title</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="pubDate" placeholder="" type="datetime-local" step="1"
+                    name="datepicker" required>
+                <label for="floatingInput">Publish Date</label>
+            </div>
+            <!-- <div class="form-floating">
+                <input class="form-control floatingInput" name="creator" placeholder="" type="text" required>
+                <label for="floatingInputGrid">Creator </label><br>
+            </div> -->
+            <div class="form-floating mt-0" style="height: 200px;">
+                <textarea class="form-control h-75" rows="5000" cols="90" name="content" placeholder=""
+                    required></textarea>
+                <label for="floatingTextarea">Content</label><br>
+            </div>
+            <div class="form-floating mt-0">
+                <input class="form-control floatingInput mt-0" name="author" placeholder="author" type="text"  id="tag-input1" required>
+                <label for="floatingInputGrid">Author</label>
+                <!------------
+                <input class="form-control floatingInput" name="author" placeholder="" type="text" required>
+                <label for="floatingInputGrid">author</label>
+                ----->
+            </div>
+            &nbsp;
+            <select class="selectpicker form-control tag " name="post_tag" multiple title="Choose tag..." required>
+                <option value="Featured">Featured</option>
+                <option value="Opinion">opinion</option>               
+                <option value="Top Stories">Top Stories</option>
+                <option value="Explainer">Explainer</option>
+                <option value="Leaflet Reports">Leaflet Reports</option>
+                
+            </select>
+
+            &nbsp;
+            <select class="selectpicker form-control mt-1 mdb-select md-form" name="category" style="margin-top: -5vh;" multiple title="Choose Category..."  required >
+
+                <option value="Equality">Equality</option>
+                <option value="Freedom">Freedom</option>
+                <option value="Religion">Religion</option>
+                <option value="LifeAndLiberty">Life and Liberty</option>
+                <option value="Health">Health</option>
+                <option value="LGBTQI">LGBTQI</option>
+                <option value="Education">Education</option>
+                <option value="WomenAndChildren">Women and Children</option>
+                <option value="AffirmativeAction">Affirmative Action</option>
+                <option value="LabourLaw">Labour Law</option>
+                <option value="Environment">Environment</option>
+                <option value="DigitalRights">Digital Rights</option>
+                <option value="Privacy">Privacy</option>
+                <option value="IP">IP</option>
+                <option value="KnowYourRights">Know your rights</option>
+                <option value="CivilJustice">Civil Justice</option>
+                <option value="CriminalJustice">Criminal Justice</option>
+                <option value="CommercialLaw">Commercial Law</option>
+                <option value="DueProcess">Due Process</option>
+                <option value="GovernanceAndPolicy">Governance and Policy</option>
+                <option value="InformationAndTransparency">Information and Transparency</option>
+                <option value="JudicialAccountability">Judicial Accountability</option>
+                <option value="InternationalLaw & WorldAffairs">International Law & World Affairs</option>
+                <option value="SupremeCourt">Supreme Court</option>
+                <option value="HighCourts">High Courts</option>
+                <option value="DistrictCourts">District Courts</option>
+                <option value="Tribunals">Tribunals</option>
+                <option value="BhimaKoregaon">Bhima Koregaon</option>
+                <option value="Sedition & UAPA">Sedition & UAPA</option>
+                <option value="PressFreedom">Press Freedom</option>
+                <option value="COVID19">COVID 19</option>
+                <option value="Hatespeech">Hate speech</option>
+                <option value="Kashmir">Kashmir</option>
+                <option value="SpecialIssues">Special Issues</option>
+                <option value="Investigation">Investigation</option>
+                <option value="BookReview">Book Review</option>
+                <option value="History">History</option>
+                <option value="Interviews">Interviews</option>
+                <option value="Videos">Videos</option>
+                <option value="Podcasts">Podcasts</option>
+                <option value="Humour">Humour</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                
+            </select>
+            
+
+            &nbsp;
+
+            <label for="floatingTextarea" class="ImageLabel">Banner Image</label><br>
+            <input type='file' name="image" class="upload" accept="image/*" required>
+            &nbsp;
+            <Button class="button" type="submit">Upload</Button>
+        </form>
+    </div>
+</body>
+<script src="upload_article_page.js" ></script>
+</html>
