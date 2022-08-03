@@ -7,7 +7,7 @@
 }
 
 .logo{
-    margin-left: 40vw;
+    align-items: center;
 }
 
 .login-page {
@@ -109,7 +109,8 @@
     background: #6c757d15;
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;      
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;      
   }
   .button {
     margin: 10px 0px 10px;
