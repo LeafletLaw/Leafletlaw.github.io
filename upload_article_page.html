@@ -29,8 +29,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<<<<<<< HEAD
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet"/>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet" />
+
+
+>>>>>>> 8c28765a66571f598908d0d48f660cf95d4c9b1b
     <link rel="stylesheet" href="upload_article_page.css">
     
 <!-- CDN links -->
@@ -38,10 +47,241 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/css/amsify.suggestags.css">
 
+<<<<<<< HEAD
     
 <!-- Amsify Plugin -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script type="text/javascript" src="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/js/jquery.amsify.suggestags.js"></script>
+=======
+    <!-- links to multi select Dropdown -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <!-- links to multi select Dropdown -->
+
+    <script>
+        $(".datepicker").datepicker({
+
+            format: "dd-mm-yyyy HH:mm",
+            //startView: "months", 
+            //minViewMode: "months"
+        });
+
+        const form = document.getElementById('myform');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const payload = new FormData(form);
+            var values = [...payload.values()]
+            colose.log(values)
+
+            // var response = await fetch('http://3.109.88.105:5000/uploadPost', {
+            //     method: 'POST',
+            //     body: payload,
+            //     // headers: {'Access-Control-Allow-Origin':'*'}
+
+            // })
+            // if (response.ok) { // if HTTP-status is 200-299
+            //     // get the response body (the method explained below)
+            //     let json = await response.text();
+            //     console.log(json)
+            //     alert("article uploaded");
+            // } else {
+            //     alert("failed to upload article");
+            // }
+        });
+
+
+        //*****************************************AUTHOR***********************************
+
+
+        (function () {
+
+            "use strict"
+
+
+            // Plugin Constructor
+            var TagsInput = function (opts) {
+                this.options = Object.assign(TagsInput.defaults, opts);
+                this.init();
+            }
+
+            // Initialize the plugin
+            TagsInput.prototype.init = function (opts) {
+                this.options = opts ? Object.assign(this.options, opts) : this.options;
+
+                if (this.initialized)
+                    this.destroy();
+
+                if (!(this.orignal_input = document.getElementById(this.options.selector))) {
+                    console.error("tags-input couldn't find an element with the specified ID");
+                    return this;
+                }
+
+                this.arr = [];
+                this.wrapper = document.createElement('div');
+                this.input = document.createElement('input');
+                init(this);
+                initEvents(this);
+
+                this.initialized = true;
+                return this;
+            }
+
+            // Add Tags
+            TagsInput.prototype.addTag = function (string) {
+
+                if (this.anyErrors(string))
+                    return;
+
+                this.arr.push(string);
+                var tagInput = this;
+
+                var tag = document.createElement('span');
+                tag.className = this.options.tagClass;
+                tag.innerText = string;
+
+                var closeIcon = document.createElement('a');
+                closeIcon.innerHTML = '&times;';
+
+                // delete the tag when icon is clicked
+                closeIcon.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var tag = this.parentNode;
+
+                    for (var i = 0; i < tagInput.wrapper.childNodes.length; i++) {
+                        if (tagInput.wrapper.childNodes[i] == tag)
+                            tagInput.deleteTag(tag, i);
+                    }
+                })
+
+
+                tag.appendChild(closeIcon);
+                this.wrapper.insertBefore(tag, this.input);
+                this.orignal_input.value = this.arr.join(',');
+
+                return this;
+            }
+
+            // Delete Tags
+            TagsInput.prototype.deleteTag = function (tag, i) {
+                tag.remove();
+                this.arr.splice(i, 1);
+                this.orignal_input.value = this.arr.join(',');
+                return this;
+            }
+
+            // Make sure input string have no error with the plugin
+            TagsInput.prototype.anyErrors = function (string) {
+                if (this.options.max != null && this.arr.length >= this.options.max) {
+                    console.log('max tags limit reached');
+                    return true;
+                }
+
+                if (!this.options.duplicate && this.arr.indexOf(string) != -1) {
+                    console.log('duplicate found " ' + string + ' " ')
+                    return true;
+                }
+
+                return false;
+            }
+
+            // Add tags programmatically 
+            TagsInput.prototype.addData = function (array) {
+                var plugin = this;
+
+                array.forEach(function (string) {
+                    plugin.addTag(string);
+                })
+                return this;
+            }
+
+            // Get the Input String
+            TagsInput.prototype.getInputString = function () {
+                return this.arr.join(',');
+            }
+
+
+            // destroy the plugin
+            TagsInput.prototype.destroy = function () {
+                this.orignal_input.removeAttribute('hidden');
+
+                delete this.orignal_input;
+                var self = this;
+
+                Object.keys(this).forEach(function (key) {
+                    if (self[key] instanceof HTMLElement)
+                        self[key].remove();
+
+                    if (key != 'options')
+                        delete self[key];
+                });
+
+                this.initialized = false;
+            }
+
+            // Private function to initialize the tag input plugin
+            function init(tags) {
+                tags.wrapper.append(tags.input);
+                tags.wrapper.classList.add(tags.options.wrapperClass);
+                tags.orignal_input.setAttribute('hidden', 'true');
+                tags.orignal_input.parentNode.insertBefore(tags.wrapper, tags.orignal_input);
+            }
+
+            // initialize the Events
+            function initEvents(tags) {
+                tags.wrapper.addEventListener('click', function () {
+                    tags.input.focus();
+                });
+
+
+                tags.input.addEventListener('keydown', function (e) {
+                    var str = tags.input.value.trim();
+
+                    if (!!(~[9, 13, 188].indexOf(e.keyCode))) {
+                        e.preventDefault();
+                        tags.input.value = "";
+                        if (str != "")
+                            tags.addTag(str);
+                    }
+
+                });
+            }
+
+
+            // Set All the Default Values
+            TagsInput.defaults = {
+                selector: '',
+                wrapperClass: 'tags-input-wrapper',
+                tagClass: 'tag',
+                max: null,
+                duplicate: false
+            }
+
+            window.TagsInput = TagsInput;
+
+        })();
+
+        var tagInput1 = new TagsInput({
+            selector: 'tag-input1',
+            duplicate: false,
+            max: 10
+        });
+        tagInput1.addData([])
+
+
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
+    </script>
+
+>>>>>>> 8c28765a66571f598908d0d48f660cf95d4c9b1b
 
 </head>
 
@@ -76,13 +316,98 @@
                     required></textarea>
                 <label for="floatingTextarea">Content</label><br>
             </div>
+<<<<<<< HEAD
             <input type="text" class="form-control" name="author" placeholder="author"/>
             <!-- <button id="Add" onclick="openForm()">Add New Authors</button>          -->
     
             <input type="text" class="form-control" name="tags" placeholder="tags"/>
             <input type="text" class="form-control" name="category" placeholder="category"/>
-            
+=======
+            <div class="form-floating mt-0">
+                <input class="form-control floatingInput mt-0" name="author" placeholder="author" type="text"
+                    id="tag-input1" required>
+                <label for="floatingInputGrid">Author</label>
+                <!------------
+                <input class="form-control floatingInput" name="author" placeholder="" type="text" required>
+                <label for="floatingInputGrid">author</label>
+                ----->
+            </div>
+            &nbsp;
+            <select class="selectpicker form-control tag " name="post_tag" multiple title="Choose tag..." required>
+                <option value="Featured">Featured</option>
+                <option value="Opinion">opinion</option>
+                <option value="Top Stories">Top Stories</option>
+                <option value="Explainer">Explainer</option>
+                <option value="Leaflet Reports">Leaflet Reports</option>
 
+            </select>
+
+            &nbsp;
+            <select class="selectpicker form-control mt-1 mdb-select md-form" name="category" style="margin-top: -5vh;"
+                multiple title="Choose Category..." required>
+
+                <option value="Equality">Equality</option>
+                <option value="Freedom">Freedom</option>
+                <option value="Religion">Religion</option>
+                <option value="LifeAndLiberty">Life and Liberty</option>
+                <option value="Health">Health</option>
+                <option value="LGBTQI">LGBTQI</option>
+                <option value="Education">Education</option>
+                <option value="WomenAndChildren">Women and Children</option>
+                <option value="AffirmativeAction">Affirmative Action</option>
+                <option value="LabourLaw">Labour Law</option>
+                <option value="Environment">Environment</option>
+                <option value="DigitalRights">Digital Rights</option>
+                <option value="Privacy">Privacy</option>
+                <option value="IP">IP</option>
+                <option value="KnowYourRights">Know your rights</option>
+                <option value="CivilJustice">Civil Justice</option>
+                <option value="CriminalJustice">Criminal Justice</option>
+                <option value="CommercialLaw">Commercial Law</option>
+                <option value="DueProcess">Due Process</option>
+                <option value="GovernanceAndPolicy">Governance and Policy</option>
+                <option value="InformationAndTransparency">Information and Transparency</option>
+                <option value="JudicialAccountability">Judicial Accountability</option>
+                <option value="InternationalLaw & WorldAffairs">International Law & World Affairs</option>
+                <option value="SupremeCourt">Supreme Court</option>
+                <option value="HighCourts">High Courts</option>
+                <option value="DistrictCourts">District Courts</option>
+                <option value="Tribunals">Tribunals</option>
+                <option value="BhimaKoregaon">Bhima Koregaon</option>
+                <option value="Sedition & UAPA">Sedition & UAPA</option>
+                <option value="PressFreedom">Press Freedom</option>
+                <option value="COVID19">COVID 19</option>
+                <option value="Hatespeech">Hate speech</option>
+                <option value="Kashmir">Kashmir</option>
+                <option value="SpecialIssues">Special Issues</option>
+                <option value="Investigation">Investigation</option>
+                <option value="BookReview">Book Review</option>
+                <option value="History">History</option>
+                <option value="Interviews">Interviews</option>
+                <option value="Videos">Videos</option>
+                <option value="Podcasts">Podcasts</option>
+                <option value="Humour">Humour</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+
+            </select>
+
+>>>>>>> 8c28765a66571f598908d0d48f660cf95d4c9b1b
+            
+        
+            <!-- start multi select Dropdown -->
+            <select id="framework1" name="framework[]" multiple="" class="form-control" style="display: none;">
+                <option value="Freedom">Freedom</option>
+                <option value="Framework">Law</option>
+                <option value="Laravel">Laravel</option>
+                <option value="YII">YII</option>
+                <option value="Zend">Zend</option>
+                <option value="Symfony">Symfony</option>
+                <option value="Phalcon">Phalcon</option>
+                <option value="Slim">Slim</option>
+            </select>
+
+
+            <!-- end multi select -->
             &nbsp;
 
             <br>
@@ -92,9 +417,21 @@
             &nbsp;
             <Button class="button" type="submit">Upload</Button>
         </form>
+
+        <script>
+            $(document).ready(function () {
+                $('#framework1').multiselect({
+                    nonSelectedText: 'Select Framework',
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                    buttonWidth: '400px'
+                });
+            });
+        </script>
     </div>
 
 </body>
+<<<<<<< HEAD
 <script>
 // function openForm() {
 //   document.getElementById("myFormadd").style.display = "block";
@@ -188,5 +525,8 @@ form.addEventListener('submit', async function (e) {
 
   
 </script>
+=======
+<script src="upload_article_page.js"></script>
+>>>>>>> 8c28765a66571f598908d0d48f660cf95d4c9b1b
 
 </html>
