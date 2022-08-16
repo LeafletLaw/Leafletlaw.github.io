@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+    </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!--datapicker-->
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="upload_article_page.css">
+
+<!-- CDN links -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.1/flatly/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/css/amsify.suggestags.css">
+
+
+<!-- Amsify Plugin -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script type="text/javascript" src="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/js/jquery.amsify.suggestags.js"></script>
+    <Style>
+        body{
+            background-color: #f1f1f1;
+        }
+        #notshow{
+            visibility: hidden;
+        }
+
+    </Style>
+
+</head>
+<body>
+    <img class="logo" src="https://theleaflet.in/wp-content/uploads/2022/03/The-Leaflet-Logo.png">
+    <div style="height: 125vh; width: 40%; margin:auto;">
+        <!-- <div>
+            <form method="post" enctype="multipart/form-data" id="getdata">
+            <input type="text" style="padding: 20px;" id="title" name="title">
+            <button name="get" style="background-color: rgb(96, 246, 123);margin-left: 10px;height: 40px;width: 60px;font-size: 20px; border-radius:5px ;" onclick="check()">get</button>
+</form>
+        </div> -->
+        <form  id="myform" enctype="multipart/form-data">
+            
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="title" placeholder="" type="text" required>
+                <label for="floatingInput">Title</label>
+                <button id= "getdata" name="get" style="background-color: rgb(96, 246, 123);margin-left: 10px;height: 40px;font-size: 20px; border-radius:5px ;text-align:center;padding: auto;" onclick="check()">find article</button>
+            </div>
+            <div id="notshow">
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="pubDate" placeholder="" type="date" step="1" id="pubDate"
+                    >
+                <label for="floatingInput">Publish Date</label>
+            </div>
+            <!-- <div class="form-floating">
+                <input class="form-control floatingInput" name="creator" placeholder="" type="text" required>
+                <label for="floatingInputGrid">Creator </label><br>
+            </div> -->
+            <div class="form-floating mt-0" style="height: 200px;">
+                <textarea class="form-control h-75" rows="5000" cols="90" name="content" placeholder="" id="content"
+                value=""></textarea>
+                <label for="floatingTextarea">Content</label><br>
+            </div>
+            <input type="text" class="form-control" name="author" placeholder="author" id="author" value=""/>
+            <!-- <button id="Add" onclick="openForm()">Add New Authors</button>          -->
+    
+            <input type="text" class="form-control" name="tags" placeholder="tags" id="post_tag" value=""/>
+            <input type="text" class="form-control" name="category" placeholder="category" id="category" value=""/>
+            
+
+            &nbsp;
+
+            <br>
+            <input type="text" name="image_url" id="image_url">
+            &nbsp;
+            <Button class="button" type="submit">Upload</Button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    
+        async function check() {
+            (async function () 
+   { 
+       var response_category= await fetch('http://3.109.88.105:5000/get_categories');
+       var response_post_authors = await fetch('http://3.109.88.105:5000/get_authors');
+       var response_post_tags = await fetch('http://3.109.88.105:5000/get_tags')
+       if (response_category.ok && response_post_authors.ok &&response_post_tags.ok){
+        let category = await response_category.json();
+        let author = await response_post_authors.json();
+        let tags = await response_post_tags.json();
+        $('input[name="category"]').amsifySuggestags({
+            suggestions: category['categories'],
+        });
+        $('input[name="author"]').amsifySuggestags({
+            suggestions: author['authors'],
+        });
+        $('input[name="tags"]').amsifySuggestags({
+            suggestions: tags['tags'],
+        })
+    }
+})();
+            form1 =document.getElementById('myform');
+            const payload1= new FormData(form1);
+            document.getElementById("notshow").style.visibility = "visible";
+            var response1 = await fetch('http://3.109.88.105:5000/get_article_by_title', {
+         method: 'POST',
+         body: payload1,
+         // headers: {'Access-Control-Allow-Origin':'*'}
+        });
+        let json = await response1.json();
+        if (response1.ok) { // if HTTP-status is 200-299
+            // get the response body (the method explained below)
+            console.log(json['article']['author'].toString());
+           // alert("article uploaded");
+           document.getElementById('content').value=json['article']['content'];
+           document.getElementById('author').value=json['article']['author'].toString();
+           document.getElementById('post_tag').value=json['article']['post_tag'].toString();
+           document.getElementById('category').value=json['article']['category'].toString();
+           document.getElementById('image_url').value=json['article']['image_link'];
+           date=new Date(json['article']['pubDate']);
+           console.log(date.toLocaleString('en-GB'));
+           document.getElementById('pubDate'),value=date.toString();
+        } else {
+            //alert("failed to upload article");
+        }
+        
+    }
+
+ const form = document.getElementById('myform');
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const payload = new FormData(form);
+    var values = [...payload.values()]
+    console.log(values);
+
+     var response = await fetch('http://3.109.88.105:5000/uploadPost', {
+         method: 'POST',
+         body: payload,
+         // headers: {'Access-Control-Allow-Origin':'*'}
+     })
+     if (response.ok) { // if HTTP-status is 200-299
+         // get the response body (the method explained below)
+         let json = await response.text();
+         console.log(json)
+         alert("article uploaded");
+     } else {
+         alert("failed to upload article");
+     }
+});
+
+
+</script>
+</html>
